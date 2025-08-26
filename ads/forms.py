@@ -14,15 +14,19 @@ class AdForm(forms.ModelForm):
     """
     class Meta:
         model = Ad
-        fields = ['id', 'user', 'title', 'description', 'image_url', 'title_video', 'video_file', 'category', 'status']
+        fields = ['id', 'user', 'title', 'description', 'image_url', 'title_video', 'video_file', 'title_audio',
+                  'audio_file', 'category', 'status']
         labels = {
             'image_url': 'Изображение',
             'video_file': 'Видеофайл',
-            'title_video': 'Название видео'
+            'title_video': 'Название видео',
+            'title_audio': 'Название аудио файла',
+            'audio_file': 'Аудио файл'
         }
         widgets = {
             'image_url': forms.FileInput(attrs={'accept': 'image/*'}),
-            'video_file': forms.FileInput(attrs={'accept': 'video/*'})
+            'video_file': forms.FileInput(attrs={'accept': 'video/*'}),
+            'audio_file': forms.FileInput(attrs={'accept': 'audio/*'})
         }
 
 class ExchangeProposalForm(forms.ModelForm):

@@ -39,6 +39,21 @@
                     </div>
                 </div>
 
+               <div class="audio-list">
+                    <div class="audio-item">
+                        <h3>{{ ad.title_audio }}</h3>
+                        <p>Статус аудиофайла: {% if ad.audio_file %}существует{% else %}отсутствует{% endif %}</p>
+                        {% if ad.audio_file %}
+                            <video width="320" controls>
+                                <source src="{{ ad.audio_file.url }}" type="audio/mpeg">
+                                Ваш браузер не поддерживает тег video.
+                            </video>
+                        {% else %}
+                            <p>Аудиофайл не загружен</p>
+                        {% endif %}
+                    </div>
+                </div>
+
                 <ul class="list-unstyled">
                     <li>Дата публикации: {{ ad.created_at }}</li>
                     <li>Статус объявления: {{ ad.status }}</li>

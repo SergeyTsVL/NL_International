@@ -20,6 +20,10 @@ class Ad(models.Model):
 
     title_video = models.CharField(max_length=200, blank=True, null=True)
     video_file = models.FileField(upload_to='videos/', blank=True, null=True)
+
+    title_audio = models.CharField(max_length=200, blank=True, null=True)
+    audio_file = models.FileField(upload_to='audio/', blank=True, null=True)
+
     # verbose_name = 'Видеофайл',
 
     category = models.TextField()

@@ -17,6 +17,11 @@ class Ad(models.Model):
     title = models.TextField()
     description = models.TextField()
     image_url = models.ImageField(upload_to='images/', blank=True, null=True)
+
+    title_video = models.CharField(max_length=200, blank=True, null=True)
+    video_file = models.FileField(upload_to='videos/', blank=True, null=True)
+    # verbose_name = 'Видеофайл',
+
     category = models.TextField()
     status = models.CharField(
         max_length=20,
@@ -35,18 +40,19 @@ class Ad(models.Model):
         """
         return str(self.user)
 
+#
+# class Video(models.Model):
+#     title_video = models.CharField(max_length=200, verbose_name='Название')
+#     # video_file = models.FileField(upload_to='videos/%Y/%m/%d/', verbose_name='Видеофайл')
+#     video_file = models.FileField(upload_to='videos/', verbose_name='Видеофайл')
+#     uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата загрузки')
 
-class Video(models.Model):
-    title = models.CharField(max_length=200, verbose_name='Название')
-    video_file = models.FileField(upload_to='videos/%Y/%m/%d/', verbose_name='Видеофайл')
-    uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата загрузки')
-
-    class Meta:
-        verbose_name = 'Видео'
-        verbose_name_plural = 'Видео'
-
-    def __str__(self):
-        return self.title
+    # class Meta:
+    #     verbose_name = 'Видео'
+    #     verbose_name_plural = 'Видео'
+    #
+    # def __str__(self):
+    #     return self.title
 
 
 class ExchangeProposal(models.Model):

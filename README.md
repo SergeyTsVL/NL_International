@@ -60,3 +60,12 @@ python manage.py test
 ![Uploading 1.png…](https://github.com/SergeyTsVL/Effective_Mobile_Junior_Python/blob/main/images/15.png)
 # Панель администратора. Пользователи
 ![Uploading 1.png…](https://github.com/SergeyTsVL/Effective_Mobile_Junior_Python/blob/main/images/16.png)
+
+
+<!--                <div class="video-item">-->
+<!--                    <h3>{{ ad.title_video }}</h3>-->
+<!--                    <video width="320" controls>-->
+<!--                        <source src="{{ ad.video_file.url }}" type="video/mp4">-->
+<!--                        Ваш браузер не поддерживает тег video.-->
+<!--                    </video>-->
+<!--                </div>-->

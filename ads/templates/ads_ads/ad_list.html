@@ -12,17 +12,32 @@
         <div class="col-md-4 mb-4">
             <div class="card">
                 <h2>
-                    <a href="{% url 'ads:ad_detail' pk=ad.pk %}">
+                    <a href="{% url 'ads:ad_detail' ad.pk %}">
                         Объявление №: {{ ad.id }} / {{ ad.title }}
                     </a>
                 </h2>
 
-                <li>
-                    {% if ad.image_url %}
-                        <img src="{{ ad.image_url.url }}" alt="{{ ad.title }}"
-                             style="max-width: 100%; height: auto;">
-                    {% endif %}
-                </li>
+                {% if ad.image_url %}
+                    <img src="{{ ad.image_url.url }}" alt="{{ ad.title }}"
+                         style="max-width: 30%; height: auto;">
+                {% endif %}
+
+
+
+                <div class="video-list">
+                    <div class="video-item">
+                        <h3>{{ ad.title }}</h3>
+                        <p>Статус видеофайла: {% if ad.video_file %}существует{% else %}отсутствует{% endif %}</p>
+                        {% if ad.video_file %}
+                            <video width="320" controls>
+                                <source src="{{ ad.video_file.url }}" type="video/mp4">
+                                Ваш браузер не поддерживает тег video.
+                            </video>
+                        {% else %}
+                            <p>Видеофайл не загружен</p>
+                        {% endif %}
+                    </div>
+                </div>
 
                 <ul class="list-unstyled">
                     <li>Дата публикации: {{ ad.created_at }}</li>

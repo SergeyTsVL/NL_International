@@ -12,8 +12,8 @@ from django.core.paginator import Paginator
 
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
-from .forms import VideoForm
-from .models import Video
+# from .forms import VideoForm
+# from .models import Video
 
 def logout_view(request):
     """
@@ -51,7 +51,7 @@ def add_ad(request):
     не было, то возвращаемся к предыдущей странице без изменений.
     """
     if request.method == "POST":
-        form = AdForm(request.POST)
+        form = AdForm(request.POST, request.FILES)
         if form.is_valid():
             ad = form.save(commit=False)
             # ad.name = request.user
@@ -61,17 +61,17 @@ def add_ad(request):
     else:
         form = AdForm()
     return render(request, 'ads_ads/add_ad.html', {'form': form})
-
-@login_required
-def ad_list(request):
-    """
-    Вызывает страницу advertisement_list.html.
-    """
-    posts = Ad.objects.all().order_by('-created_at')
-    paginator = Paginator(posts, 3)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request, 'board/advertisement_list.html', {'page_obj': page_obj})
+#
+# @login_required
+# def ad_list(request):
+#     """
+#     Вызывает страницу advertisement_list.html.
+#     """
+#     posts = Ad.objects.all().order_by('-created_at')
+#     paginator = Paginator(posts, 3)
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number)
+#     return render(request, 'board/advertisement_list.html', {'page_obj': page_obj})
 
 
 class SearchResultsView(ListView):
@@ -183,7 +183,7 @@ def ad_list(request):
     page_obj = paginator.get_page(page_number)
 
     return render(request, 'ads_ads/ad_list.html', {
-        'page_obj': page_obj
+        'page_obj': page_obj, 'ads': ads
     })
 
 @login_required  # Проверяет регистрацию пользователя
@@ -215,18 +215,18 @@ def edit_exc(request, pk):
 
 
 
-def video_list(request):
-    videos = Video.objects.all()
-    return render(request, 'ads_ads/video_list.html', {'videos': videos})
-
-def upload_video(request):
-    if request.method == 'POST':
-        form = VideoForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('video_list')
-    else:
-        form = VideoForm()
-    return render(request, 'ads_ads/upload_video.html', {'form': form})
+# def video_list(request):
+#     videos = Video.objects.all()
+#     return render(request, 'ads_ads/video_list.html', {'videos': videos})
+#
+# def upload_video(request):
+#     if request.method == 'POST':
+#         form = VideoForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('video_list')
+#     else:
+#         form = VideoForm()
+#     return render(request, 'ads_ads/upload_video.html', {'form': form})
 
 

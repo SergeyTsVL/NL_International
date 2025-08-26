@@ -1,5 +1,5 @@
 from django import forms
-from .models import Ad, ExchangeProposal, Video
+from .models import Ad, ExchangeProposal
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -14,7 +14,16 @@ class AdForm(forms.ModelForm):
     """
     class Meta:
         model = Ad
-        fields = ['id', 'user', 'title', 'description', 'image_url', 'category', 'status']
+        fields = ['id', 'user', 'title', 'description', 'image_url', 'title_video', 'video_file', 'category', 'status']
+        labels = {
+            'image_url': 'Изображение',
+            'video_file': 'Видеофайл',
+            'title_video': 'Название видео'
+        }
+        widgets = {
+            'image_url': forms.FileInput(attrs={'accept': 'image/*'}),
+            'video_file': forms.FileInput(attrs={'accept': 'video/*'})
+        }
 
 class ExchangeProposalForm(forms.ModelForm):
     """
@@ -29,14 +38,14 @@ class ExchangeProposalForm(forms.ModelForm):
         fields = ['id', 'ad_sender', 'ad_receiver', 'comment', 'status']
 
 
-class VideoForm(forms.ModelForm):
-    class Meta:
-        model = Video
-        fields = ('title', 'video_file')
-        labels = {
-            'title': 'Название видео',
-            'video_file': 'Выберите видеофайл'
-        }
+# class VideoForm(forms.ModelForm):
+#     class Meta:
+#         model = Video
+#         fields = ('title', 'video_file')
+#         labels = {
+#             'title': 'Название видео',
+#             'video_file': 'Выберите видеофайл'
+#         }
 
 class SignUpForm(UserCreationForm):
     """

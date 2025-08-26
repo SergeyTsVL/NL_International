@@ -178,7 +178,7 @@ def profile(request):
 @login_required
 def ad_list(request):
     ads = Ad.objects.all()
-    paginator = Paginator(ads, 3)  # 6 объявлений на странице
+    paginator = Paginator(ads, 6)  # 6 объявлений на странице
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

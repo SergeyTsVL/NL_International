@@ -14,9 +14,10 @@ class AdForm(forms.ModelForm):
     """
     class Meta:
         model = Ad
-        fields = ['id', 'user', 'title', 'description', 'image_url', 'title_video', 'video_file', 'title_audio',
+        fields = ['id', 'user', 'title', 'description', 'title_image', 'image_url', 'title_video', 'video_file', 'title_audio',
                   'audio_file', 'category', 'status']
         labels = {
+            'title_image': 'Название изображения',
             'image_url': 'Изображение',
             'video_file': 'Видеофайл',
             'title_video': 'Название видео',

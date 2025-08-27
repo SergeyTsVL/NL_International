@@ -85,7 +85,9 @@ class SearchResultsView(ListView):
     def get_queryset(self):  # новый
         query = self.request.GET.get('q')
         object_list = Ad.objects.filter(
-            Q(title__icontains=query) | Q(description__icontains=query)
+            Q(title__icontains=query) | Q(title_image__icontains=query) |
+            Q(title_video__icontains=query) | Q(title_audio__icontains=query) | Q(category__icontains=query) |
+            Q(status__icontains=query)
         )
         return object_list
 
@@ -110,20 +112,6 @@ def ad_detail(request, pk):
     audio = get_object_or_404(Ad, id=pk)
     audio.views_audio = F('views_audio') + 1
     audio.save()
-
-    # v = views_video
-    # print(ad.views_video)
-    # print(type(ad.views_video))
-
-    # ad.views_video += 1
-    #
-    # v = ad.views_video
-    # v.save()
-
-    # # Увеличиваем счетчик просмотров атомарно
-    # views_video.views = F('views') + 1
-    # print(views_video)
-    # views_video.save()
     return render(request, 'ads_ads/ad_detail.html', {'ad': ad})
 
 @login_required
@@ -251,14 +239,14 @@ def edit_exc(request, pk):
 
 
 
-def video_detail(request, id):
-    # ads = Ad.objects.get(pk=pk)
-    views_video = get_object_or_404(Ad, id=id)
-
-    # Увеличиваем счетчик просмотров атомарно
-    views_video.views = F('views') + 1
-    views_video.save()
-
-    return render(request, 'video_detail.html', {'video_views': views_video})
+# def video_detail(request, id):
+#     # ads = Ad.objects.get(pk=pk)
+#     views_video = get_object_or_404(Ad, id=id)
+#
+#     # Увеличиваем счетчик просмотров атомарно
+#     views_video.views = F('views') + 1
+#     views_video.save()
+#
+#     return render(request, 'video_detail.html', {'video_views': views_video})
 
 

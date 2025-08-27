@@ -15,6 +15,10 @@ from django.http import HttpResponseRedirect
 # from .forms import VideoForm
 # from .models import Video
 
+from django.shortcuts import get_object_or_404, render
+from django.db.models import F
+# from .models import Ad
+
 def logout_view(request):
     """
     Этот метод выполняет выход пользователя из системы и перенаправляет его на домашнюю страницу.
@@ -94,6 +98,32 @@ def ad_detail(request, pk):
     Вызывает страницу ad_detail.html.
     """
     ad = Ad.objects.get(pk=pk)
+
+    image = get_object_or_404(Ad, id=pk)
+    image.views_image = F('views_image') + 1
+    image.save()
+
+    video = get_object_or_404(Ad, id=pk)
+    video.views_video = F('views_video') + 1
+    video.save()
+
+    audio = get_object_or_404(Ad, id=pk)
+    audio.views_audio = F('views_audio') + 1
+    audio.save()
+
+    # v = views_video
+    # print(ad.views_video)
+    # print(type(ad.views_video))
+
+    # ad.views_video += 1
+    #
+    # v = ad.views_video
+    # v.save()
+
+    # # Увеличиваем счетчик просмотров атомарно
+    # views_video.views = F('views') + 1
+    # print(views_video)
+    # views_video.save()
     return render(request, 'ads_ads/ad_detail.html', {'ad': ad})
 
 @login_required
@@ -171,7 +201,7 @@ def add_proposal(request):
 
 def profile(request):
     """
-    Вызывает страницу home.html .
+    Вызывает страницу home.html.
     """
     return render(request, 'home.html')
 
@@ -181,6 +211,13 @@ def ad_list(request):
     paginator = Paginator(ads, 6)  # 6 объявлений на странице
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+
+
+    # video_views = get_object_or_404(page_obj, id=id)
+    # # Увеличиваем счетчик просмотров атомарно
+    # video_views.views = F('views') + 1
+    # video_views.save()
+
 
     return render(request, 'ads_ads/ad_list.html', {
         'page_obj': page_obj, 'ads': ads
@@ -214,19 +251,14 @@ def edit_exc(request, pk):
 
 
 
+def video_detail(request, id):
+    # ads = Ad.objects.get(pk=pk)
+    views_video = get_object_or_404(Ad, id=id)
 
-# def video_list(request):
-#     videos = Video.objects.all()
-#     return render(request, 'ads_ads/video_list.html', {'videos': videos})
-#
-# def upload_video(request):
-#     if request.method == 'POST':
-#         form = VideoForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('video_list')
-#     else:
-#         form = VideoForm()
-#     return render(request, 'ads_ads/upload_video.html', {'form': form})
+    # Увеличиваем счетчик просмотров атомарно
+    views_video.views = F('views') + 1
+    views_video.save()
+
+    return render(request, 'video_detail.html', {'video_views': views_video})
 
 

@@ -22,6 +22,7 @@
                     <h3>Название изображения: {{ ad.title_image }}</h3>
                     <img src="{{ ad.image_url.url }}" alt="{{ ad.title }}"
                          style="max-width: 30%; height: auto;">
+                    <p>Количество просмотров: {{ ad.views_image }}</p>
                 {% endif %}
 
 
@@ -36,6 +37,7 @@
                                 <source src="{{ ad.video_file.url }}" type="video/mp4">
                                 Ваш браузер не поддерживает тег video.
                             </video>
+                            <p>Количество просмотров: {{ ad.views_video }}</p>
                         {% else %}
                             <p>Видеофайл не загружен</p>
                         {% endif %}
@@ -51,6 +53,7 @@
                                 <source src="{{ ad.audio_file.url }}" type="audio/mpeg">
                                 Ваш браузер не поддерживает тег audio.
                             </video>
+                            <p>Количество прослушиваний: {{ ad.views_audio }}</p>
                         {% else %}
                             <p>Аудиофайл не загружен</p>
                         {% endif %}

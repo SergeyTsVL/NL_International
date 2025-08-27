@@ -85,9 +85,8 @@ class SearchResultsView(ListView):
     def get_queryset(self):  # новый
         query = self.request.GET.get('q')
         object_list = Ad.objects.filter(
-            Q(title__icontains=query) | Q(title_image__icontains=query) |
-            Q(title_video__icontains=query) | Q(title_audio__icontains=query) | Q(category__icontains=query) |
-            Q(status__icontains=query)
+            Q(title__icontains=query) | Q(title_image__icontains=query) | Q(title_video__icontains=query) |
+            Q(title_audio__icontains=query) | Q(category__icontains=query) | Q(status__icontains=query)
         )
         return object_list
 

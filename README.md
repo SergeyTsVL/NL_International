@@ -25,16 +25,16 @@ python manage.py test NL_International
 
 # Начальная страница
 ![Uploading 1.png…](https://github.com/SergeyTsVL/NL_International/blob/main/images/1.png)
-# Регистрация
+# Добавление объявления с разными контентами: Картинки, видео, аудио
 ![Uploading 1.png…](https://github.com/SergeyTsVL/NL_International/blob/main/images/2.png)
-# Приветствие на домашней странице
+# Поиск среди объявлений
 ![Uploading 1.png…](https://github.com/SergeyTsVL/NL_International/blob/main/images/3.png)
-# Добавление объявления
+# Вывод результатов поиска
 ![Uploading 1.png…](https://github.com/SergeyTsVL/NL_International/blob/main/images/4.png)
-# Отображение добавленного объявления с возможностью его редактирования и удаления
+# Пагинация
 ![Uploading 1.png…](https://github.com/SergeyTsVL/NL_International/blob/main/images/5.png)
-# Отображение добавленного объявления в списке с общими объявлениями, установлена пагинация
+# inline-блоки
 ![Uploading 1.png…](https://github.com/SergeyTsVL/NL_International/blob/main/images/6.png)
-# Поиск объявления по частичному совпадению в описании и оглавлении
+# inline-блоки, с возможностью редактирования, добавления и удаления из панели администратора
 ![Uploading 1.png…](https://github.com/SergeyTsVL/NL_International/blob/main/images/7.png)
 

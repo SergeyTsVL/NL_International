@@ -98,6 +98,7 @@ def ad_detail(request, pk):
     """
     Вызывает страницу ad_detail.html.
     """
+    # print(request)
     ad = Ad.objects.get(pk=pk)
 
     image = get_object_or_404(Ad, id=pk)
@@ -111,6 +112,7 @@ def ad_detail(request, pk):
     audio = get_object_or_404(Ad, id=pk)
     audio.views_audio = F('views_audio') + 1
     audio.save()
+    # print(str(render(request, 'ads_ads/ad_detail.html', {'ad': ad})))
     return render(request, 'ads_ads/ad_detail.html', {'ad': ad})
 
 @login_required
@@ -195,7 +197,7 @@ def profile(request):
 @login_required
 def ad_list(request):
     ads = Ad.objects.all()
-    paginator = Paginator(ads, 6)  # 6 объявлений на странице
+    paginator = Paginator(ads, 3)  # 6 объявлений на странице
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -221,6 +223,7 @@ def edit_exc(request, pk):
     :param pk:
     :return:
     """
+    print(request, pk)
     ads = ExchangeProposal.objects.get(pk=pk)
     if request.method == "POST":
         form = ExchangeProposalForm(request.POST, request.FILES, instance=ads)

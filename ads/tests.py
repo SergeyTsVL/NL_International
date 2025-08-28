@@ -1,3 +1,5 @@
+import unittest
+
 from django.test import TestCase
 from django.contrib.auth.models import User
 from ads.models import Ad
@@ -25,3 +27,7 @@ class AdTestCase(TestCase):
         self.assertEqual(self.ad.user.username, 'TestUser')
         self.assertEqual(self.ad.title, "Конь")
         self.assertEqual(self.ad.description, "Старый но скачет")
+
+if __name__ == '__main__':
+    unittest.main()
+

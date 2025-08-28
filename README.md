@@ -25,7 +25,14 @@ Password: 123456789
 
 
 # Запуск всех тестов
-python manage.py test
+python manage.py test NL_International
+python -m unittest ads.tests.py
+python -m unittest discover
+$ ./manage.py test   
+
+pytest
+
+https://yandex.ru/video/preview/13194727536262874304
 
 
 # Начальная страница

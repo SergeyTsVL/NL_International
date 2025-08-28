@@ -31,7 +31,7 @@ python manage.py test NL_International
 ![Uploading 1.png…](https://github.com/SergeyTsVL/NL_International/blob/main/images/3.png)
 # Вывод результатов поиска
 ![Uploading 1.png…](https://github.com/SergeyTsVL/NL_International/blob/main/images/4.png)
-# Пагинация
+# Пагинация, счетчик просмотров контента
 ![Uploading 1.png…](https://github.com/SergeyTsVL/NL_International/blob/main/images/5.png)
 # inline-блоки
 ![Uploading 1.png…](https://github.com/SergeyTsVL/NL_International/blob/main/images/6.png)

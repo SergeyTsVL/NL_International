@@ -2,8 +2,8 @@
 
 
 # Установка виртуального окружения
-pip install -r requirements.txt
 pip freeze > requirements.txt
+pip install -r requirements.txt
 
 # Создание миграций
 python manage.py makemigrations
@@ -14,13 +14,15 @@ python manage.py runserver
 
 # Создание учетной записи администратора
 python manage.py createsuperuser
+Например:
 Username (leave blank to use 'tsars'): tsars
 Email address: test@example.com
 Password: 123456789
 
 
 # Запуск всех тестов
-python manage.py test NL_International
+python manage.py test --keepdb
+python manage.py test --verbosity 2
 
 
 # Начальная страница

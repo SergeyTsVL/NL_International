@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Ad(models.Model):
@@ -13,9 +14,9 @@ class Ad(models.Model):
         ('cancelled', 'Отменено')
     ]
     # id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ads')   # created_name
-    title = models.TextField()
-    description = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ads', blank=True, null=True)   # created_name
+    title = models.TextField(blank=True, null=True)
+    description = models.TextField(blank=True, null=True, max_length=500)
 
     title_image = models.CharField(max_length=200, blank=True, null=True)
     image_url = models.ImageField(upload_to='images/', blank=True, null=True)
@@ -32,7 +33,7 @@ class Ad(models.Model):
 
     # verbose_name = 'Видеофайл',
 
-    category = models.TextField()
+    category = models.TextField(blank=True, null=True)
     status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICES,
@@ -42,13 +43,17 @@ class Ad(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
+    # def get_absolute_url(self):
+    #     return reverse('ad_detail', args=[str(self.id)])
+
+
 
     def __str__(self):
         """
         Метод используется для определения строкового представления объекта модели
         :return:
         """
-        return str(self.user)
+        return '%s, %s' % (self.title, self.description)
 
 #
 # class Video(models.Model):

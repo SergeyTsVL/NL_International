@@ -34,7 +34,7 @@ def home(request):
 
 def signup(request):
     """
-    ызывает страницу для подписи объявлений.
+    Вызывает страницу для подписи объявлений.
     """
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -65,18 +65,6 @@ def add_ad(request):
     else:
         form = AdForm()
     return render(request, 'ads_ads/add_ad.html', {'form': form})
-#
-# @login_required
-# def ad_list(request):
-#     """
-#     Вызывает страницу advertisement_list.html.
-#     """
-#     posts = Ad.objects.all().order_by('-created_at')
-#     paginator = Paginator(posts, 3)
-#     page_number = request.GET.get('page')
-#     page_obj = paginator.get_page(page_number)
-#     return render(request, 'board/advertisement_list.html', {'page_obj': page_obj})
-
 
 class SearchResultsView(ListView):
     model = Ad
@@ -96,7 +84,7 @@ class HomePageView(TemplateView):
 
 def ad_detail(request, pk):
     """
-    Вызывает страницу ad_detail.html.
+    Вызывает страницу ad_detail.html. При это атомарно подсчитывает количество просмотров.
     """
     # print(request)
     ad = Ad.objects.get(pk=pk)
@@ -196,18 +184,13 @@ def profile(request):
 
 @login_required
 def ad_list(request):
+    """
+    Этот метод выводит пагинацию.
+    """
     ads = Ad.objects.all()
     paginator = Paginator(ads, 3)  # 6 объявлений на странице
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-
-
-    # video_views = get_object_or_404(page_obj, id=id)
-    # # Увеличиваем счетчик просмотров атомарно
-    # video_views.views = F('views') + 1
-    # video_views.save()
-
-
     return render(request, 'ads_ads/ad_list.html', {
         'page_obj': page_obj, 'ads': ads
     })
@@ -236,19 +219,5 @@ def edit_exc(request, pk):
         form = ExchangeProposalForm(instance=ads)
     return render(request, 'ads_ads/edit_exc.html',
                   {'form': form, 'ads': ads})
-
-
-
-
-
-# def video_detail(request, id):
-#     # ads = Ad.objects.get(pk=pk)
-#     views_video = get_object_or_404(Ad, id=id)
-#
-#     # Увеличиваем счетчик просмотров атомарно
-#     views_video.views = F('views') + 1
-#     views_video.save()
-#
-#     return render(request, 'video_detail.html', {'video_views': views_video})
 
 
